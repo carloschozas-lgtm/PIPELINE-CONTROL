@@ -1,0 +1,36 @@
+{
+  "entities": {
+    "proceso": {
+      "title": "Proceso de Adquisición",
+      "description": "Representa un proceso de compra o licitación en el pipeline.",
+      "type": "object",
+      "properties": {
+        "solped": { "type": "string", "description": "Número de solicitud de pedido" },
+        "nombreOt": { "type": "string", "description": "Nombre de la orden de trabajo o proceso" },
+        "montoUsd": { "type": "number", "description": "Monto estimado en dólares" },
+        "gestor": { "type": "string", "description": "Nombre del gestor asignado" },
+        "tipoContratacion": { "type": "string", "description": "Tipo de contratación (Licitación, Directa, etc.)" },
+        "tiempoEstandar": { "type": "number", "description": "Días hábiles estándar para el proceso" },
+        "status": { "type": "string", "description": "Estado actual del proceso" },
+        "fechaAsignacion": { "type": "string", "format": "date-time", "description": "Fecha en que se asignó el proceso" },
+        "bitacora": {
+          "type": "array",
+          "description": "Historial de actualizaciones del proceso"
+        },
+        "cronograma": {
+          "type": "array",
+          "description": "Lista de tareas y fechas calculadas"
+        },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["solped", "nombreOt", "montoUsd", "gestor", "fechaAsignacion"]
+    }
+  },
+  "firestore": {
+    "procesos": {
+      "schema": "proceso",
+      "description": "Colección principal de procesos de adquisición"
+    }
+  }
+}

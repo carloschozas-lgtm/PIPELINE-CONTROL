@@ -1,0 +1,54 @@
+// ===============================================================
+// Assumed Data Model
+// ===============================================================
+//
+// Collection: procesos
+// Document ID: auto-generated
+// Fields:
+//   - solped: string (required) - Número de solicitud
+//   - nombreOt: string (required) - Nombre del proceso
+//   - montoUsd: number (required) - Monto en USD
+//   - gestor: string (required) - Nombre del gestor
+//   - tipoContratacion: string (required) - Tipo de proceso
+//   - tiempoEstandar: number (required) - Días hábiles
+//   - status: string (required) - Estado actual
+//   - fechaAsignacion: timestamp (required) - Fecha de inicio
+//   - bitacora: list (required) - Historial de eventos
+//   - cronograma: list (required) - Tareas calculadas
+//   - createdAt: timestamp (required) - Fecha de creación
+//
+// ===============================================================
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper Functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isValidProceso(data) {
+      return data.solped is string && data.solped.size() > 0 && data.solped.size() < 50 &&
+             data.nombreOt is string && data.nombreOt.size() > 0 && data.nombreOt.size() < 200 &&
+             data.montoUsd is number && data.montoUsd >= 0 &&
+             data.gestor is string && data.gestor.size() > 0 &&
+             data.bitacora is list && data.bitacora.size() < 500 &&
+             data.cronograma is list && data.cronograma.size() <= 20;
+    }
+
+    match /procesos/{procesoId} {
+      // Allow read for any authenticated user (anonymous is allowed)
+      allow read: if isAuthenticated();
+      
+      // Allow create if authenticated and data is valid
+      allow create: if isAuthenticated() && isValidProceso(request.resource.data);
+      
+      // Allow update if authenticated and data is valid
+      allow update: if isAuthenticated() && isValidProceso(request.resource.data);
+      
+      // Deny delete by default
+      allow delete: if false;
+    }
+  }
+}
