@@ -1,10 +1,10 @@
 {
-  "projectId": "gen-lang-client-0973159546",
-  "appId": "1:525973010940:web:3dc1e9453b4c5252c1da79",
-  "apiKey": "AIzaSyCT3hbX6oOjxGJ9Oirp-QqTfmRavYTtxjM",
-  "authDomain": "gen-lang-client-0973159546.firebaseapp.com",
-  "firestoreDatabaseId": "ai-studio-926c0127-4a81-48dd-b62b-c7e9d734ba66",
-  "storageBucket": "gen-lang-client-0973159546.firebasestorage.app",
-  "messagingSenderId": "525973010940",
-  "measurementId": ""
+  "projectId": "pipeline-supplynet",
+  "appId": "1:664367397023:web:242b45726cfd2bd54c4aaa",
+  "apiKey": "AIzaSyDaIHM5AsQHrAbUrSGb-23WryR3txQQNaA",
+  "authDomain": "pipeline-supplynet.firebaseapp.com",
+  "storageBucket": "pipeline-supplynet.firebasestorage.app",
+  "messagingSenderId": "664367397023",
+  "measurementId": "G-255FD4MKN7",
+  "firestoreDatabaseId": "(default)"
 }

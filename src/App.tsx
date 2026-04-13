@@ -660,14 +660,20 @@ export default function App() {
 
   useEffect(() => {
     const q = query(collection(db, 'procesos'), orderBy('createdAt', 'desc'));
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      const data = snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      })) as Proceso[];
-      setProcesos(data);
-      setLoading(false);
-    });
+    const unsubscribe = onSnapshot(q, 
+      (snapshot) => {
+        const data = snapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        })) as Proceso[];
+        setProcesos(data);
+        setLoading(false);
+      },
+      (error) => {
+        console.error("Firestore listening error:", error);
+        setLoading(false); // Enable UI even if restricted
+      }
+    );
 
     return () => unsubscribe();
   }, []);
